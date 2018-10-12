@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+		<record id="notify_waiting_attendees" model="mail.template">
+			<field name="name">Notify waiting attendees about the last place</field>
+			<field name="model_id" ref="event.model_event_registration"/>
+			<field name="email_from"><![CDATA["${object.company_id.name|safe}" <${(object.company_id.email or user.email)|safe}>]]></field>
+			<field name="email_to">${object.email|safe}</field>
+			<field name="subject"><![CDATA[There is a place for ${object.event_id.name}!]]></field>
+			<field name="body_html"><![CDATA[
+<div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+	<table cellspacing="0" cellpadding="0" style="width:600px;border-collapse:collapse;background:inherit;color:inherit">
+		<tbody>
+			<tr>
+      			<td valign="center" width="200" style="padding:10px 10px 10px 5px;font-size: 12px">
+          			<img src="/logo.png" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${user.company_id.name}">
+      			</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+	<p>Dear ${object.name},</p>
+	<p>
+  		You might be lucky today... There is a free place for "${object.event_id.name}".
+	</p>
+	<p>
+  	To take the last place, please send a confirmation mail to:
+	</p>
+	<div style="text-align: center; margin-top: 16px;">
+   		<a href="mailto:${object.company_id.email}?Subject=Confirm%20place%20for%20${object.event_id.name}" style="padding: 5px 10px; font-size: 12px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius:3px">
+   			${object.company_id.name} - Mail : ${object.company_id.email}
+		</a>
+	</div>
+	<p>See you there!</p>
+</div>
+<div style="padding:0px;width:600px;margin:auto; margin-top: 10px; background: #fff repeat top /100%;color:#777777">
+	<p style="font-size: 11px; margin-top: 10px;">
+  		<strong>Sent using <a href="www.odoo.com" style="text-decoration:none; color: #875A7B;">Odoo</a></strong>
+	</p>
+</div>
+		]]></field>
+      <field name="user_signature" eval="False"/>
+  </record>
+		<record id="notify_waiting_attendees_with_ticket_type" model="mail.template">
+			<field name="name">Notify waiting attendees about the last place (with ticket type)</field>
+			<field name="model_id" ref="event.model_event_registration"/>
+			<field name="email_from"><![CDATA["${object.company_id.name|safe}" <${(object.company_id.email or user.email)|safe}>]]></field>
+			<field name="email_to">${object.email|safe}</field>
+			<field name="subject"><![CDATA[There is a place for ${object.event_id.name}!]]></field>
+			<field name="body_html"><![CDATA[
+<div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+	<table cellspacing="0" cellpadding="0" style="width:600px;border-collapse:collapse;background:inherit;color:inherit">
+		<tbody>
+			<tr>
+      			<td valign="center" width="200" style="padding:10px 10px 10px 5px;font-size: 12px">
+          			<img src="/logo.png" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${user.company_id.name}">
+      			</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+	<p>Dear ${object.name},</p>
+	<p>
+  		You might be lucky today... There is a free place for "${object.event_id.name}" (${object.event_ticket_id.name}).
+	</p>
+	<p>
+  	To take the last place, please send a confirmation mail to:
+	</p>
+	<div style="text-align: center; margin-top: 16px;">
+   		<a href="mailto:${object.company_id.email}?Subject=Confirm%20place%20for%20${object.event_id.name}" style="padding: 5px 10px; font-size: 12px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius:3px">
+   			${object.company_id.name} - Mail : ${object.company_id.email}
+		</a>
+	</div>
+	<p>See you there!</p>
+</div>
+<div style="padding:0px;width:600px;margin:auto; margin-top: 10px; background: #fff repeat top /100%;color:#777777">
+	<p style="font-size: 11px; margin-top: 10px;">
+  		<strong>Sent using <a href="www.odoo.com" style="text-decoration:none; color: #875A7B;">Odoo</a></strong>
+	</p>
+</div>
+		]]></field>
+      <field name="user_signature" eval="False"/>
+  </record>
+
+	</data>
+</odoo>
