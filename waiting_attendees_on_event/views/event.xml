@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="event_registration_with_warning_limit_seats_form_view" model="ir.ui.view">
+		<field name="name">event.registration.with.warning.on.limit.seat</field>
+		<field name="model">event.registration</field>
+		<field name="inherit_id" ref="event.view_event_registration_form"/>
+		<field name="priority" eval="17"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='state']" position="replace" >
+				<field name="state" nolabel="1" colspan="2" widget="statusbar" statusbar_visible="inactive,draft,open,done"/>
+			</xpath>
+			<xpath expr="//button[@name='confirm_registration']" position="replace" >
+				<button name="confirm_registration" string="Confirm" states="draft,inactive" type="object" class="oe_highlight"/>
+			</xpath>
+			<xpath expr="//button[@name='button_reg_cancel']" position="replace" >
+				<button name="button_reg_cancel" string="Cancel Registration" states="draft,open,inactive" type="object"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="event_with_warning_limit_seats_form_view" model="ir.ui.view">
+		<field name="name">event.with.warning.on.limit.seat</field>
+		<field name="model">event.event</field>
+		<field name="inherit_id" ref="event.view_event_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//div[@class='oe_title']" position="before" >
+				<field name="warning_max_seats" class="alert alert-warning"
+					   attrs="{'invisible': [('warning_max_seats', '!=', 'No more seats available for this event.')]}"/>
+			</xpath>
+			<xpath expr="//page[@name='event_mail_schedule']" position="after">
+				<page string="Waiting Attendees" attrs="{'invisible': [('waiting_attendee_ids', '=', [])]}">
+					<field name="waiting_attendee_ids">
+						<tree>
+							<field name="state" invisible="1"/>
+							<field name="partner_id"/>
+							<field name="name"/>
+							<field name="email"/>
+							<field name="event_ticket_id"/>
+						</tree>
+					</field>
+				</page>
+			</xpath>
+		</field>
+	</record>
+</odoo>
